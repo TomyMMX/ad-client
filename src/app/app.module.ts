@@ -1,20 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { Router } from '@angular/router';
 
-import { AdsListComponent } from './adslist.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { FoldersModule } from './folders/folder.module';
 
 @NgModule({
   declarations: [
-    AdsListComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
+    BrowserModule, 	
+	HttpModule,
+	FoldersModule,
+	AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AdsListComponent]
+  bootstrap: [AppComponent] //Component that is the entry poitn of our app
 })
+
 export class AppModule { }

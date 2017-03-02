@@ -7,15 +7,15 @@ import { Folder } from './models';
 
 @Injectable()
 export class FolderService {
-	private apiUrl = 'http://localhost:8080/api/folders/parent/';  // URL to web api
+	private apiUrl = 'http://localhost:8080/api/';  // URL to web api
 	
 	constructor(private http: Http) { }
 	
 	getFolders(fId): Promise<Folder[]> {
-		return this.http.get(this.apiUrl+fId)
+		return this.http.get(this.apiUrl + 'folders/parent/' + fId)
 			.toPromise()
 			.then(response => {
-				console.log(response.json());
+				//console.log(response.json());
 				return response.json() as Folder[];
 			}).catch(this.handleError);
 	}
