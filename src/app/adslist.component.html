@@ -1,3 +1,11 @@
 <h2>
   {{title}}
 </h2>
+
+<ul class="folders">
+  <li *ngFor="let folder of folders" 
+	[class.selected]="folder === currentFolder" 
+	(click)="onSelect(folder)">
+	<span class="badge">{{folder.id}}</span> {{folder.name}}
+  </li>
+</ul>
