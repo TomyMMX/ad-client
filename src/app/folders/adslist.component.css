@@ -20,3 +20,15 @@ ul{
 .folders li:hover{
 	background-color: #d6e8f1;	
 }
+.two{
+	width: 100%;
+}
+.left{    
+    display:table-cell;
+    width: 95%;
+}
+.right{
+	text-align: right;
+    display:table-cell; 
+    width: 5%;
+}

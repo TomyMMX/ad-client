@@ -1,8 +1,14 @@
 <h3>
   {{title}}
 </h3>
-
-<span>Location: /{{currentLocation}}</span>
+<div class="two">
+	<div class="left">
+		<span>Location: /{{currentLocation}}</span>
+	</div>
+	<div class="right">
+		<div class="btn" (click)="goToParrent()">Back</div>
+	</div>
+</div>
 
 <ul class="folders">
   <li *ngFor="let folder of folders" 
