@@ -11,7 +11,7 @@ Unfortunately I don't have the Ad server running for outside use, so here is a g
 
 ## Project organization
 Most files are boilerplate created by the Angular CLI. The code that is interesting for the list component can be found in [src/app/folders](https://github.com/TomyMMX/ad-client/tree/master/src/app/folders). 
-- [adslist.component.ts](https://github.com/TomyMMX/ad-client/blob/master/src/app/folders/adslist.component.ts) - contains the code for getting end binding all the data
+- [adslist.component.ts](https://github.com/TomyMMX/ad-client/blob/master/src/app/folders/adslist.component.ts) - contains the code for getting and binding all the data
 - [folder.service.ts](https://github.com/TomyMMX/ad-client/blob/master/src/app/folders/folder.service.ts) - contains the functions that get the necessary data from the ad API.
 - [adslist.component.html](https://github.com/TomyMMX/ad-client/blob/master/src/app/folders/adslist.component.html) - holds the template for the folder/ad list
 
