@@ -1,5 +1,5 @@
 # Ad Client  
-for my [Ad REST API](https://github.com/TomyMMX/ad-server). Written with [Angluar(v2)](http://angular.io).
+for my [Ad REST API](https://github.com/TomyMMX/ad-server). Written with [Angular(v2)](http://angular.io).
 
 ## Description
 The scaffolding for this project was generated with [Angular CLI](https://github.com/angular/angular-cli).  
