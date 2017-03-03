@@ -1,14 +1,10 @@
-.two{
-	width: 100%;
-}
 .left{    
+	margin-right:5px;
     display:table-cell;
-    width: 95%;
+	float: left;
 }
-.right{
-	text-align: right;
-    display:table-cell; 
-    width: 5%;
+.clear{
+	clear:both;
 }
 
 .folders{

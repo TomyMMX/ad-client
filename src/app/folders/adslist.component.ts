@@ -17,8 +17,11 @@ import { FolderService } from './folder.service';
 export class AdsListComponent implements OnInit {
 	title = 'Ad API client';
 	currentLocation = "";
+	//folders to show
 	folders: Folder[];
+	//all folders on the path to the current one
 	currentPath: Folder[];
+	//all ads in the current folder
 	ads: Ad[];
   
 	constructor(
@@ -30,48 +33,38 @@ export class AdsListComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
+		//get all folders in the current folder
 		this.route.params
 		// (+) converts string 'id' to a number
 		.switchMap((params: Params) => {
 			return this.folderService.getFolders(+params['id']);
 		})
-		.subscribe((folders: Folder[]) => {
-			this.folders = folders;			
-			this.handleBackClick();			
-			this.setPathString();
-		});	
+		.subscribe((folders: Folder[]) => this.folders = folders);	
 
+		//get all ads in the curent folder
 		this.route.params
-		.switchMap((params: Params) => {
-			return this.folderService.getAds(+params['id']);
-		})
-		.subscribe((ads: Ad[]) => {
-			this.ads = ads;
+		.switchMap((params: Params) => this.folderService.getAds(+params['id']))
+		.subscribe((ads: Ad[]) => this.ads = ads);	
+		
+		//get the path to this folder
+		this.route.params
+		.switchMap((params: Params) => this.folderService.getFolderPath(+params['id']))
+		.subscribe((folders: Folder[]) => {
+			this.currentPath = folders;
+			this.setPathString();
 		});	
 	} 
 	
-	//TODO: get the path from server
-	
-	//if the id changed to the parent of the last folder we went back... set path acordingly
-	handleBackClick(): void {
-		if(this.currentPath.length > 0){
-			if(this.currentPath[this.currentPath.length-1].parentid === +this.route.snapshot.params['id']){
-				this.moveBackOnPath();
-			}
-		}
-	}
-  
 	/*getFolders(fId): void {
 		this.folderService.getFolders(fId).then(folders => this.folders = folders);
 	}*/
 	
+	//get the parent id so we can move back one folder
 	moveBackOnPath(): number{
 		var parentid = 0;
 		if(this.currentPath.length > 0){
 			parentid = this.currentPath[this.currentPath.length-1].parentid;			
 		}		
-		//remove the folder from path
-		this.currentPath.splice(-1,1);
 		
 		return parentid;		
 	}
@@ -86,14 +79,12 @@ export class AdsListComponent implements OnInit {
 	
 	/*CLICK HANDLERS*/
 	//move to selected fodler
-	onSelect(folder: Folder): void {
-		//push the new folder to the path
-		this.currentPath.push(folder);		
+	onSelect(folder: Folder): void {	
 		this.router.navigate(['/folder', folder.id]);
 	}
 	
 	//move to previous folder on path
-	goToParrent(): void {
+	goToParent(): void {
 		this.router.navigate(['/folder', this.moveBackOnPath()]);
 	}
 }

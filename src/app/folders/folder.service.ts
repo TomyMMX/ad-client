@@ -22,6 +22,15 @@ export class FolderService {
 			}).catch(this.handleError);
 	}
 	
+	//get all folders on the path to a folder
+	getFolderPath(fId): Promise<Folder[]> {
+		return this.http.get(this.apiUrl + 'folders/' + fId + '/path')
+			.toPromise()
+			.then(response => {
+				return response.json() as Folder[];
+			}).catch(this.handleError);
+	}
+	
 	//get all ads in some folder
 	getAds(fId): Promise<Ad[]> {
 		return this.http.get(this.apiUrl + 'ads/folder/' + fId)

@@ -3,13 +3,13 @@
 </h3>
 <div class="two">
 	<div class="left">
-		<span>Location: /{{currentLocation}}</span>
+		<div class="btn" (click)="goToParent()">Back</div>
 	</div>
-	<div class="right">
-		<div class="btn" (click)="goToParrent()">Back</div>
-	</div>
+	<div class="left">
+		<span> : /{{currentLocation}}</span>
+	</div>	
 </div>
-
+<div class="clear"></div>
 <ul class="folders">
   <li *ngFor="let folder of folders" 
 	[class.selected]="folder === currentFolder" 
