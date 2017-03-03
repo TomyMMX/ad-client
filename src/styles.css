@@ -12,6 +12,10 @@ body{
 	font: normal 16px/1.5 Tahoma,Arial,Helvetica,"Bitstream Vera Sans",serif;
 }
 
+a{
+	color: black;
+}
+
 #main{
 	width: 60%;	
 	margin-left: auto;

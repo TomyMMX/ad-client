@@ -4,6 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Folder } from './models';
+import { Ad } from './models';
 
 @Injectable()
 export class FolderService {
@@ -11,12 +12,23 @@ export class FolderService {
 	
 	constructor(private http: Http) { }
 	
+	//get all folders in some folder
 	getFolders(fId): Promise<Folder[]> {
 		return this.http.get(this.apiUrl + 'folders/parent/' + fId)
 			.toPromise()
 			.then(response => {
 				//console.log(response.json());
 				return response.json() as Folder[];
+			}).catch(this.handleError);
+	}
+	
+	//get all ads in some folder
+	getAds(fId): Promise<Ad[]> {
+		return this.http.get(this.apiUrl + 'ads/folder/' + fId)
+			.toPromise()
+			.then(response => {
+				//console.log(response.json());
+				return response.json() as Ad[];
 			}).catch(this.handleError);
 	}
 	

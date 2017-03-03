@@ -19,6 +19,7 @@ export class AdsListComponent implements OnInit {
 	currentLocation = "";
 	folders: Folder[];
 	currentPath: Folder[];
+	ads: Ad[];
   
 	constructor(
 		private folderService: FolderService,
@@ -38,8 +39,18 @@ export class AdsListComponent implements OnInit {
 			this.folders = folders;			
 			this.handleBackClick();			
 			this.setPathString();
-		});			
+		});	
+
+		this.route.params
+		.switchMap((params: Params) => {
+			return this.folderService.getAds(+params['id']);
+		})
+		.subscribe((ads: Ad[]) => {
+			this.ads = ads;
+		});	
 	} 
+	
+	//TODO: get the path from server
 	
 	//if the id changed to the parent of the last folder we went back... set path acordingly
 	handleBackClick(): void {

@@ -29,6 +29,10 @@
 	background-color: #d6e8f1;	
 }
 
+.ads li{
+	background-color: #ffefd1;
+}
+
 .ad_btn {
     width: 85%;
 	height: 30px;	
@@ -36,6 +40,11 @@
 }
 .ad_btn .folder {
 	content:url(/public/images/folder.png);  
+	height: 30px;
+    float: left;
+}
+.ad_btn .ad {
+	content:url(/public/images/ad.png);  
 	height: 30px;
     float: left;
 }

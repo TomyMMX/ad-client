@@ -22,3 +22,16 @@
 	</div>
   </li>
 </ul>
+
+<ul class="folders ads">
+  <li *ngFor="let ad of ads">
+    <a href="{{ad.url}}" target="_blank">
+		<div class="ad_btn">
+			<div class="ad"></div>​
+			<div class="name">
+				{{ad.name}}
+			</div>
+		</div>
+	</a>
+  </li>
+</ul>
