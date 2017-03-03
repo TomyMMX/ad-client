@@ -1,25 +1,3 @@
-.folders{
-	width: 100%;
-	list-style-type: none;	
-}
-
-ul{
-	 padding:0px;
-}
-
-.folders li{
-	text-align: center;
-	cursor: pointer;
-	padding: 5px;
-	margin: 3px;
-	margin-bottom: 7px;
-	border-radius: 5px;
-	background-color: #e9e9e9;	
-}
-
-.folders li:hover{
-	background-color: #d6e8f1;	
-}
 .two{
 	width: 100%;
 }
@@ -31,4 +9,39 @@ ul{
 	text-align: right;
     display:table-cell; 
     width: 5%;
+}
+
+.folders{
+	width: 100%;
+	list-style-type: none;	
+	padding:0px;
+}
+.folders li{
+	text-align: center;
+	cursor: pointer;
+	padding: 5px;
+	margin: 3px;
+	margin-bottom: 7px;
+	border-radius: 5px;
+	background-color: #e9e9e9;	
+}
+.folders li:hover{
+	background-color: #d6e8f1;	
+}
+
+.ad_btn {
+    width: 85%;
+	height: 30px;	
+    margin: auto;
+}
+.ad_btn .folder {
+	content:url(/public/images/folder.png);  
+	height: 30px;
+    float: left;
+}
+.ad_btn .name {
+   height: 30px;
+   margin-left: 50px;
+   margin-top: 2px;
+   float:left;
 }

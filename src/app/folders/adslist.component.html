@@ -14,6 +14,11 @@
   <li *ngFor="let folder of folders" 
 	[class.selected]="folder === currentFolder" 
 	(click)="onSelect(folder)">
-	<span class="badge">{{folder.id}}</span> {{folder.name}}
+	<div class="ad_btn">
+		<div class="folder"></div>​
+		<div class="name">
+			<span class="badge">{{folder.id}}</span> {{folder.name}}
+		</div>
+	</div>
   </li>
 </ul>
