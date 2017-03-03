@@ -41,7 +41,7 @@ export class AdsListComponent implements OnInit {
 		})
 		.subscribe((folders: Folder[]) => this.folders = folders);	
 
-		//get all ads in the curent folder
+		//get all ads in the current folder
 		this.route.params
 		.switchMap((params: Params) => this.folderService.getAds(+params['id']))
 		.subscribe((ads: Ad[]) => this.ads = ads);	
@@ -78,7 +78,7 @@ export class AdsListComponent implements OnInit {
 	}
 	
 	/*CLICK HANDLERS*/
-	//move to selected fodler
+	//move to selected folder
 	onSelect(folder: Folder): void {	
 		this.router.navigate(['/folder', folder.id]);
 	}
