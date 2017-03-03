@@ -27,9 +27,42 @@ export class AdsListComponent implements OnInit {
 	) {
 		this.currentPath = [];		
 	}
+	
+	ngOnInit(): void {
+		this.route.params
+		// (+) converts string 'id' to a number
+		.switchMap((params: Params) => {
+			return this.folderService.getFolders(+params['id']);
+		})
+		.subscribe((folders: Folder[]) => {
+			this.folders = folders;			
+			this.handleBackClick();			
+			this.setPathString();
+		});			
+	} 
+	
+	//if the id changed to the parent of the last folder we went back... set path acordingly
+	handleBackClick(): void {
+		if(this.currentPath.length > 0){
+			if(this.currentPath[this.currentPath.length-1].parentid === +this.route.snapshot.params['id']){
+				this.moveBackOnPath();
+			}
+		}
+	}
   
-	getFolders(fId): void {
+	/*getFolders(fId): void {
 		this.folderService.getFolders(fId).then(folders => this.folders = folders);
+	}*/
+	
+	moveBackOnPath(): number{
+		var parentid = 0;
+		if(this.currentPath.length > 0){
+			parentid = this.currentPath[this.currentPath.length-1].parentid;			
+		}		
+		//remove the folder from path
+		this.currentPath.splice(-1,1);
+		
+		return parentid;		
 	}
 	
 	//compose the path string from the path array
@@ -40,32 +73,16 @@ export class AdsListComponent implements OnInit {
 		}
 	}
 	
-	ngOnInit(): void {
-		this.route.params
-		// (+) converts string 'id' to a number
-		.switchMap((params: Params) => {
-			return this.folderService.getFolders(+params['id']);
-		})
-		.subscribe((folders: Folder[]) => {
-			this.folders = folders;
-			this.setPathString();
-		});			
-	} 
-
+	/*CLICK HANDLERS*/
+	//move to selected fodler
 	onSelect(folder: Folder): void {
 		//push the new folder to the path
 		this.currentPath.push(folder);		
 		this.router.navigate(['/folder', folder.id]);
 	}
 	
+	//move to previous folder on path
 	goToParrent(): void {
-		var parentid = 0;
-		if(this.currentPath.length > 0){
-			parentid = this.currentPath[this.currentPath.length-1].parentid;			
-		}		
-		//remove the folder from path
-		this.currentPath.splice(-1,1);
-		
-		this.router.navigate(['/folder', parentid]);
+		this.router.navigate(['/folder', this.moveBackOnPath()]);
 	}
 }
