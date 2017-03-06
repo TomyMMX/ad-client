@@ -1,7 +1,9 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { RouterModule, Routes, Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/Rx';
 
 import { Folder } from './models';
 import { Ad } from './models';
@@ -16,6 +18,7 @@ import { FolderService } from './folder.service';
 
 export class AdsListComponent implements OnInit {
 	title = 'Ad API client';
+	errorMessage: string;
 	currentLocation = "";
 	//folders to show
 	folders: Folder[];
@@ -33,26 +36,19 @@ export class AdsListComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
-		//get all folders in the current folder
 		this.route.params
-		// (+) converts string 'id' to a number
-		.switchMap((params: Params) => {
-			return this.folderService.getFolders(+params['id']);
-		})
-		.subscribe((folders: Folder[]) => this.folders = folders);	
-
-		//get all ads in the current folder
-		this.route.params
-		.switchMap((params: Params) => this.folderService.getAds(+params['id']))
-		.subscribe((ads: Ad[]) => this.ads = ads);	
-		
-		//get the path to this folder
-		this.route.params
-		.switchMap((params: Params) => this.folderService.getFolderPath(+params['id']))
-		.subscribe((folders: Folder[]) => {
-			this.currentPath = folders;
-			this.setPathString();
-		});	
+		.switchMap((params: Params) => Observable.forkJoin(
+			// (+) converts string 'id' to a number
+			this.folderService.getFolders(+params['id']), //get all folders in the current folder
+			this.folderService.getAds(+params['id']), //get all ads in the current folder
+			this.folderService.getFolderPath(+params['id']) //get the path to this folder
+		)).subscribe(
+			(data) => {
+				this.folders = data[0] as Folder[];
+				this.ads = data[1] as Ad[];
+				this.currentPath = data[2] as Folder[];
+				this.setPathString();},
+			error => this.errorMessage = <any>error);	
 	} 
 	
 	/*getFolders(fId): void {
