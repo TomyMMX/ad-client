@@ -15,20 +15,26 @@ export class FolderService {
 	
 	//get all folders in some folder
 	getFolders(fId): Observable<Folder[]> {
-		return this.http.get(this.apiUrl + 'folders/parent/' + fId)
-			.map(response =>  response.json() as Folder[]).catch(this.handleError);
+		return this.http
+			.get(this.apiUrl + 'folders/parent/' + fId)
+			.map(response =>  response.json() as Folder[])
+			.catch(this.handleError);
 	}
 	
 	//get all folders on the path to a folder
 	getFolderPath(fId): Observable<Folder[]> {
-		return this.http.get(this.apiUrl + 'folders/' + fId + '/path')			
-			.map(response => response.json() as Folder[]).catch(this.handleError);
+		return this.http
+			.get(this.apiUrl + 'folders/' + fId + '/path')			
+			.map(response => response.json() as Folder[])
+			.catch(this.handleError);
 	}
 	
 	//get all ads in some folder
 	getAds(fId): Observable<Ad[]> {
-		return this.http.get(this.apiUrl + 'ads/folder/' + fId)
-			.map(response => response.json() as Ad[]).catch(this.handleError);
+		return this.http
+			.get(this.apiUrl + 'ads/folder/' + fId)
+			.map(response => response.json() as Ad[])
+			.catch(this.handleError);
 	}
 	
 	private handleError (error: any) {
@@ -37,6 +43,6 @@ export class FolderService {
     	errMsg = error.message ? error.message : error.toString();
     	
 		console.error("Problem getting data from server: " + errMsg);
-		return Observable.throw(errMsg);
+		return Observable.throw("Could not get data from API... please try later.");
 	}
 }

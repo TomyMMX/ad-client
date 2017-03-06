@@ -60,6 +60,14 @@ h3{
 	background-color: #d6e8f1;
 }
 
+.error{
+	background-color: #fdd4d4;	
+	border: 1px solid #ccc;
+    border-radius: 4px;
+	color: red;
+	padding: 5px;
+}
+
 @media(max-width: 500px)
 {
 	#main{
